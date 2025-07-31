@@ -19,6 +19,9 @@
   <nav class="sticky-nav">
     <div class="container nav-container">
       <div class="logo">Riste Lalkov</div>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      ☰
+    </button>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="projects.html" class="active">Projects</a></li>
@@ -106,6 +109,23 @@
   </div>
 
   <script>
+
+    // grab the toggle button and the links container
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks  = document.querySelector('.nav-links');
+
+  navToggle.addEventListener('click', () => {
+    // show/hide the menu
+    const isOpen = navLinks.classList.toggle('open');
+    // update aria-expanded for accessibility
+    navToggle.setAttribute('aria-expanded', isOpen);
+  });
+
+  // optional: close menu when you click a link
+  navLinks.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => navLinks.classList.remove('open'))
+  );
+  
     const lightbox = document.getElementById('lightbox');
     const imgEl = lightbox.querySelector('.modal-img');
     const captionEl = lightbox.querySelector('.modal-caption');
