@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Riste Lalkov - Projects</title>
+  <title>Riste Lalkov – Projects</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <!-- Ensure Learn More buttons don’t stretch full width -->
+  <style>
+    .project-link {
+      align-self: flex-start;
+    }
+  </style>
 </head>
+
 <body>
   <nav class="sticky-nav">
     <div class="container nav-container">
@@ -17,7 +25,7 @@
         <li><a href="experience.html">Experience</a></li>
         <li><a href="education.html">Education</a></li>
         <li><a href="skills.html">Skills</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="about.html">About</a></li>
       </ul>
     </div>
   </nav>
@@ -27,39 +35,57 @@
       <h2 class="section-title">Projects</h2>
       <div class="projects-grid">
 
+        <!-- ESAP -->
         <div class="project-card">
           <img src="projects/esap.png" alt="Esap App Screenshot" class="project-img" />
           <h3 class="project-title">Esap</h3>
-          <p class="project-desc">Flutter application designed as a comprehensive financial management and document archiving tool. It integrates with a backend API to provide real-time financial data and archival document management. Key features include document archiving, PDF handling, dashboard and financial data views.</p>
-          <a href="https://play.google.com/store/apps/details?id=com.codex.moj_esap&hl=mk" target="_blank" class="project-link">View on Play Store</a>
+          <p class="project-desc">
+            Flutter application for financial management & document archiving.
+          </p>
+          <a href="https://play.google.com/store/apps/details?id=com.codex.moj_esap&hl=mk" target="_blank"
+            class="project-link">View on Play Store</a>
+          <a href="#" class="project-link" data-gallery="esap_screenshots" data-count="16">Learn More</a>
         </div>
 
+        <!-- cxParkingSystem -->
         <div class="project-card">
-          <img src="projects/parking.png" alt="cxParkingSystem Screenshot" class="project-img" />
+          <img src="projects/parking.png" alt="cxParkingSystem" class="project-img" />
           <h3 class="project-title">cxParkingSystem</h3>
-          <p class="project-desc">The City Parking Management App is tailored for employees of the city's public enterprise to efficiently monitor and enforce parking regulations. It provides real-time access to payment verifications via SMS and ticket data, enabling quick identification of unpaid sessions and empowering staff to issue fines promptly.</p>
-          <a href="#" class="project-link">Learn More</a>
+          <p class="project-desc">
+            City Parking Management App for real-time SMS payment checks.
+          </p>
+          <a href="#" class="project-link" data-gallery="parking_screenshots" data-count="8">Learn More</a>
         </div>
 
+        <!-- cxOsSredstva -->
         <div class="project-card">
-          <img src="projects/ossredstva.png" alt="cxOsSredstva Screenshot" class="project-img" />
+          <img src="projects/ossredstva.png" alt="cxOsSredstva" class="project-img" />
           <h3 class="project-title">cxOsSredstva</h3>
-          <p class="project-desc">OsnovniSredstva is an inventory management application developed in Kotlin to help companies efficiently track and record assets. It offers real-time updates, detailed record-keeping, and streamlined auditing to ensure accurate reporting and optimized control.</p>
-          <a href="#" class="project-link">Learn More</a>
+          <p class="project-desc">
+            Kotlin-based asset tracker with live updates & auditing.
+          </p>
+          <a href="#" class="project-link" data-gallery="ossredstva_screenshots" data-count="0">Learn More</a>
         </div>
 
+        <!-- SterilizationTA -->
         <div class="project-card">
-          <img src="projects/sterilization.png" alt="Sterilization Tracking App Screenshot" class="project-img" />
+          <img src="projects/sterilization.png" alt="SterilizationTA" class="project-img" />
           <h3 class="project-title">SterilizationTA</h3>
-          <p class="project-desc">Android app for hospital sterilization workflows, built with Kotlin and Jetpack Compose. Features barcode scanning, NFC-based user authorization, and set history tracking via an Oracle-backed API.</p>
-          <a href="#" class="project-link">View on GitHub</a>
+          <p class="project-desc">
+            Android sterilization workflow app with barcode & NFC scans.
+          </p>
+          <a href="#" class="project-link" data-gallery="sterilization_screenshots" data-count="11" data-ext="png">Learn
+            More</a>
         </div>
 
+        <!-- cxOmniBus -->
         <div class="project-card">
-          <img src="projects/omnibus.png" alt="Digital Signage System Screenshot" class="project-img" />
+          <img src="projects/omnibus.png" alt="cxOmniBus" class="project-img" />
           <h3 class="project-title">cxOmniBus</h3>
-          <p class="project-desc">Multi-platform digital signage solution using Kotlin, Flutter, and Firebase. Includes a mobile dashboard for media uploads, an Android TV app for display, and a REST API backend for playlist management and device pairing.</p>
-          <a href="#" class="project-link">Learn More</a>
+          <p class="project-desc">
+            Multi-platform digital signage with playlist & device pairing.
+          </p>
+          <a href="#" class="project-link" data-gallery="omnibus_screenshots" data-count="5">Learn More</a>
         </div>
 
       </div>
@@ -70,5 +96,63 @@
     <p>© 2025 Riste Lalkov</p>
   </footer>
 
+  <!-- Modal Lightbox with Prev/Next -->
+  <div id="lightbox" class="modal">
+    <span class="modal-close">&times;</span>
+    <button class="modal-nav modal-prev">&#8249;</button>
+    <img class="modal-img" src="" alt="" />
+    <button class="modal-nav modal-next">&#8250;</button>
+    <div class="modal-caption"></div>
+  </div>
+
+  <script>
+    const lightbox = document.getElementById('lightbox');
+    const imgEl = lightbox.querySelector('.modal-img');
+    const captionEl = lightbox.querySelector('.modal-caption');
+    const prevBtn = lightbox.querySelector('.modal-prev');
+    const nextBtn = lightbox.querySelector('.modal-next');
+    let galleryImages = [], currentIndex = 0;
+
+    function showImage(idx) {
+      imgEl.src = galleryImages[idx];
+      captionEl.textContent = `${idx + 1} of ${galleryImages.length}`;
+      lightbox.classList.add('show');
+    }
+
+    document.querySelectorAll('.project-link[data-gallery]').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const folder = link.dataset.gallery;
+        const count = parseInt(link.dataset.count, 10);
+        const ext = link.dataset.ext || 'jpg';                // read extension
+        const key = link.dataset.key || folder.replace('_screenshots', '');
+
+        galleryImages = Array.from({ length: count }, (_, i) =>
+          `projects/${folder}/${key}${i + 1}.${ext}`               // use .png or .jpg
+        );
+        currentIndex = 0;
+        showImage(0);
+      });
+    });
+
+
+    prevBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+      showImage(currentIndex);
+    });
+    nextBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      currentIndex = (currentIndex + 1) % galleryImages.length;
+      showImage(currentIndex);
+    });
+
+    lightbox.querySelector('.modal-close').onclick = () =>
+      lightbox.classList.remove('show');
+    lightbox.onclick = e => {
+      if (e.target === lightbox) lightbox.classList.remove('show');
+    };
+  </script>
 </body>
+
 </html>

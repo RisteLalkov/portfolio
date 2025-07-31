@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,11 +8,29 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
+
+<script>
+  const toggle = document.querySelector('.nav-toggle');
+  const links  = document.querySelector('.nav-links');
+
+  toggle.addEventListener('click', () => {
+    // toggle the “open” class
+    links.classList.toggle('open');
+    // update aria-expanded for accessibility
+    const expanded = links.classList.contains('open');
+    toggle.setAttribute('aria-expanded', expanded);
+  });
+</script>
+
+
 <body>
 
   <nav class="sticky-nav">
     <div class="container nav-container">
       <div class="logo">Riste Lalkov</div>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+      ☰
+    </button>
       <ul class="nav-links">
         <li><a href="index.html" class="active">Home</a></li>
         <li><a href="projects.html">Projects</a></li>
@@ -31,23 +50,25 @@
           <h1>Hello, I’m <span class="highlight">Riste Lalkov</span></h1>
           <p class="subtitle">Mobile App Developer | Flutter & Kotlin</p>
           <p class="about-text">
-            I build clean, practical mobile applications that solve real-world problems. Currently finishing my Computer Science degree while developing cross-platform apps professionally.
+            I build clean, practical mobile applications that solve real-world problems. Currently finishing my Computer
+            Science degree while developing cross-platform apps professionally.
           </p>
 
           <div class="contact-info">
-  <a href="mailto:x.lalkov@gmail.com" class="contact-item" title="Email">
-    <img src="icons/email.svg" alt="Email Icon" class="icon" />
-    x.lalkov@gmail.com
-  </a>
-  <a href="tel:+38970759459" class="contact-item" title="Phone">
-    <img src="icons/phone.svg" alt="Phone Icon" class="icon" />
-    +389 70 759 459
-  </a>
-  <a href="https://www.linkedin.com/in/ristelalkov/" target="_blank" rel="noopener" class="contact-item" title="LinkedIn">
-    <img src="icons/linkedin.svg" alt="LinkedIn Icon" class="icon" />
-    linkedin.com/in/ristelalkov
-  </a>
-</div>
+            <a href="mailto:x.lalkov@gmail.com" class="contact-item" title="Email">
+              <img src="icons/email.svg" alt="Email Icon" class="icon" />
+              x.lalkov@gmail.com
+            </a>
+            <a href="tel:+38970759459" class="contact-item" title="Phone">
+              <img src="icons/phone.svg" alt="Phone Icon" class="icon" />
+              +389 70 759 459
+            </a>
+            <a href="https://www.linkedin.com/in/ristelalkov/" target="_blank" rel="noopener" class="contact-item"
+              title="LinkedIn">
+              <img src="icons/linkedin.svg" alt="LinkedIn Icon" class="icon" />
+              linkedin.com/in/ristelalkov
+            </a>
+          </div>
 
         </div>
       </div>
@@ -59,4 +80,5 @@
   </footer>
 
 </body>
+
 </html>
