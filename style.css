@@ -1,46 +1,59 @@
-/* Reset & Base */
+/*============================================*/
+/* 1. Root Variables & Reset                  */
+/*============================================*/
 :root {
-  --clr-accent: #3b82f6;
-  --clr-text-light: #f0f4f8;
+  --clr-accent:        #3b82f6;
+  --clr-text-light:    #f0f4f8;
+  --clr-bg-start:      #f0f4f8;
+  --clr-bg-end:        #d9e2ec;
+  --clr-text-main:     #102a43;
+  --clr-text-muted:    #627d98;
+  --clr-box-shadow:    rgba(16,42,67,0.1);
 }
-
 * {
-  margin: 0; padding: 0; box-sizing: border-box;
+  margin: 0; padding: 0;
+  box-sizing: border-box;
   scroll-behavior: smooth;
   font-family: 'Inter', sans-serif;
 }
 
+/*============================================*/
+/* 2. Base Layout                            */
+/*============================================*/
 body {
-  background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
-  color: #102a43;
+  background: linear-gradient(135deg, var(--clr-bg-start), var(--clr-bg-end));
+  color: var(--clr-text-main);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
-
 .container {
   width: 90%;
   max-width: 900px;
   margin: 0 auto;
 }
+.main-content {
+  flex-grow: 1;
+  padding: 80px 0 40px;
+}
 
-/* Sticky Nav */
+/*============================================*/
+/* 3. Navigation                             */
+/*============================================*/
 .sticky-nav {
   position: sticky;
   top: 0;
   background: rgba(255 255 255 / 0.85);
   backdrop-filter: saturate(180%) blur(10px);
-  box-shadow: 0 2px 8px rgba(16, 42, 67, 0.1);
+  box-shadow: 0 2px 8px var(--clr-box-shadow);
   z-index: 1000;
 }
-
 .nav-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 15px 0;
 }
-
 .logo {
   font-weight: 700;
   font-size: 1.5rem;
@@ -48,34 +61,40 @@ body {
   letter-spacing: 1.5px;
   user-select: none;
 }
-
 .nav-links {
   list-style: none;
   display: flex;
   gap: 20px;
 }
-
 .nav-links a {
   color: #334e68;
   text-decoration: none;
   font-weight: 600;
   padding: 8px 12px;
   border-radius: 6px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s, color 0.3s;
 }
-
 .nav-links a:hover,
 .nav-links a.active {
   background: #486581;
-  color: #f0f4f8;
+  color: var(--clr-text-light);
 }
 
-/* Main Content */
-.main-content {
-  flex-grow: 1;
-  padding: 80px 0 40px;
+/*============================================*/
+/* 4. Animations                              */
+/*============================================*/
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-in {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards;
 }
 
+/*============================================*/
+/* 5. Home / Intro Section                    */
+/*============================================*/
 .intro-section {
   text-align: center;
   max-width: 700px;
@@ -83,35 +102,31 @@ body {
   padding: 40px 20px;
   background: white;
   border-radius: 16px;
-  box-shadow: 0 8px 20px rgba(16, 42, 67, 0.1);
-  animation: fadeInUp 0.8s ease forwards;
-  opacity: 0;
+  box-shadow: 0 8px 20px var(--clr-box-shadow);
 }
-
 .intro-section h1 {
   font-size: 3rem;
   margin-bottom: 10px;
   font-weight: 700;
 }
-
 .highlight {
-  color: #3b82f6; /* bright blue accent */
+  color: var(--clr-accent);
 }
-
 .subtitle {
   font-weight: 500;
   font-size: 1.3rem;
-  color: #627d98;
+  color: var(--clr-text-muted);
   margin-bottom: 20px;
 }
-
 .about-text {
   font-size: 1.1rem;
   line-height: 1.7;
   color: #334e68;
 }
 
-/* Profile Section */
+/*============================================*/
+/* 6. Profile Section                         */
+/*============================================*/
 .profile-wrapper {
   display: flex;
   flex-wrap: wrap;
@@ -120,30 +135,29 @@ body {
   justify-content: center;
   margin-top: 20px;
 }
-
 .profile-pic {
   width: 180px;
   height: 180px;
   border-radius: 50%;
   object-fit: cover;
-  box-shadow: 0 8px 20px rgba(16, 42, 67, 0.12);
-  border: 4px solid #3b82f6;
+  box-shadow: 0 8px 20px rgba(16,42,67,0.12);
+  border: 4px solid var(--clr-accent);
   flex-shrink: 0;
 }
-
 .intro-text {
   max-width: 480px;
   text-align: left;
 }
 
-/* Contact Info */
+/*============================================*/
+/* 7. Contact Info                            */
+/*============================================*/
 .contact-info {
   margin-top: 25px;
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
-
 .contact-item {
   font-weight: 600;
   color: #334e68;
@@ -154,7 +168,6 @@ body {
   gap: 12px;
   transition: color 0.3s ease;
 }
-
 .contact-item .icon {
   flex-shrink: 0;
   width: 22px;
@@ -164,70 +177,23 @@ body {
   transition: color 0.3s ease, fill 0.3s ease, stroke 0.3s ease;
   stroke-width: 1.8;
 }
-
 .contact-item:hover {
-  color: #1e40af; /* darker blue on hover */
+  color: #1e40af;
 }
-
-
-/* Footer */
-.footer {
-  text-align: center;
-  padding: 20px 0;
-  background: #486581;
-  color: #f0f4f8;
-  user-select: none;
-  font-weight: 600;
-  letter-spacing: 0.7px;
-}
-
-/* Animations */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-  .intro-section h1 {
-    font-size: 2.1rem;
-  }
-
-  .nav-links {
-    gap: 12px;
-  }
-  
-  .profile-wrapper {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .intro-text {
-    max-width: 100%;
-  }
-}
-
+/* fallback coloring for embedded SVG icons */
 .icon {
-  width: 22px;       /* size */
-  height: 22px;
-  margin-right: 12px;
-  filter: invert(26%) sepia(81%) saturate(2737%) hue-rotate(195deg) brightness(91%) contrast(85%);
-  /* This filter can be adjusted or removed, used to colorize black SVGs */
-  flex-shrink: 0;
+  filter: invert(26%) sepia(81%) saturate(2737%) hue-rotate(195deg)
+          brightness(91%) contrast(85%);
   transition: filter 0.3s ease;
 }
-
 .contact-item:hover .icon {
-  filter: invert(39%) sepia(79%) saturate(5999%) hue-rotate(200deg) brightness(106%) contrast(108%);
+  filter: invert(39%) sepia(79%) saturate(5999%)
+          hue-rotate(200deg) brightness(106%) contrast(108%);
 }
 
-/* Projects Section */
+/*============================================*/
+/* 8. Projects Section                        */
+/*============================================*/
 .projects-section {
   padding: 60px 0;
 }
@@ -245,11 +211,11 @@ body {
 .project-card {
   background: white;
   border-radius: 12px;
-  box-shadow: 0 6px 16px rgba(16,42,67,0.1);
+  box-shadow: 0 6px 16px var(--clr-box-shadow);
   padding: 20px;
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 .project-card:hover {
   transform: translateY(-5px);
@@ -264,7 +230,6 @@ body {
   padding: 16px;
   border-radius: 8px;
 }
-
 .project-title {
   font-size: 1.3rem;
   font-weight: 600;
@@ -275,7 +240,6 @@ body {
   line-height: 1.6;
   color: #334e68;
 }
-
 .project-link {
   display: inline-block;
   padding: 8px 12px;
@@ -285,13 +249,167 @@ body {
   border-radius: 6px;
   color: var(--clr-accent);
   background: none;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s, color 0.3s;
   align-self: flex-start;
-  width: auto;
   margin-top: 12px;
 }
-
 .project-link:hover {
   background-color: var(--clr-accent);
   color: var(--clr-text-light);
 }
+
+/*============================================*/
+/* 9. Experience Timeline                     */
+/*============================================*/
+.experience-section {
+  padding: 60px 0;
+}
+.timeline {
+  position: relative;
+  margin: 40px 0;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--clr-accent);
+}
+.timeline-item {
+  position: relative;
+  padding-left: 60px;
+  margin-bottom: 40px;
+}
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: 14px;
+  top: 5px;
+  width: 16px;
+  height: 16px;
+  background: var(--clr-accent);
+  border-radius: 50%;
+}
+.timeline-date {
+  font-weight: 600;
+  color: var(--clr-text-muted);
+  margin-bottom: 8px;
+}
+.timeline-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.timeline-company {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #486581;
+  margin-bottom: 8px;
+}
+.timeline-details {
+  line-height: 1.6;
+  color: #334e68;
+}
+.company-logo {
+  width: 20px;
+  height: auto;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+
+/*============================================*/
+/* 10. Footer                                 */
+/*============================================*/
+.footer {
+  text-align: center;
+  padding: 20px 0;
+  background: #486581;
+  color: var(--clr-text-light);
+  user-select: none;
+  font-weight: 600;
+  letter-spacing: 0.7px;
+}
+
+/*============================================*/
+/* 11. Responsive Tweaks                      */
+/*============================================*/
+@media (max-width: 600px) {
+  .intro-section h1 {
+    font-size: 2.1rem;
+  }
+  .nav-links {
+    gap: 12px;
+  }
+  .profile-wrapper {
+    flex-direction: column;
+    text-align: center;
+  }
+  .intro-text {
+    max-width: 100%;
+  }
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+.education-section .company-logo {
+  width: 32px;
+}
+
+/* Compact Skill Cards with Icons */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 16px;
+  margin-bottom: 40px;
+}
+.skill-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px var(--clr-box-shadow);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+.skill-card:hover {
+  transform: translateY(-4px);
+}
+.skill-icon {
+  width: 32px;
+  height: auto;
+  margin-bottom: 8px;
+}
+
+/* Compact Language Badges with Icons */
+.language-grid {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.language-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px var(--clr-box-shadow);
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.3s ease;
+}
+.language-card:hover {
+  transform: translateY(-3px);
+}
+.lang-icon {
+  width: 24px;
+  height: auto;
+}
+
